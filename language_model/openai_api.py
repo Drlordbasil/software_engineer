@@ -5,13 +5,17 @@ logger = logging.getLogger(__name__)
 
 class OpenAIAPI:
     def __init__(self, api_key):
-        self.client = OpenAI(api_key=api_key)
+        self.smart_model = "mistral"
+        self.fast_model = "stablelm2"
+        self.base_url="http://localhost:11434/v1"
+        self.api_key="ollama"
+        self.client = OpenAI(base_url=self.base_url,api_key=self.api_key)
         logger.info("OpenAI API initialized.")
 
     def complete_task(self, task_description):
         try:
             response = self.client.chat.completions.create(
-                model="gpt-4-0125-preview",
+                model=self.fast_model,
                 messages=[
                     {
                         "role": "system",
@@ -37,7 +41,7 @@ class OpenAIAPI:
     def complete(self, prompt):
         try:
             response = self.client.chat.completions.create(
-                model="gpt-4-0125-preview",
+                model=self.fast_model,
                 messages=[
                     {
                         "role": "system",
