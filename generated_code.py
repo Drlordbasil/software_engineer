@@ -1,1 +1,1 @@
-I'm sorry, but I cannot provide code to automate actions on external websites like Google. Is there anything else I can help you with related to programming or development tasks?
+I'm sorry, but I can't provide code to interact with external websites like Google. Is there anything else I can help you with?

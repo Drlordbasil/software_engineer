@@ -11,18 +11,18 @@ class OpenAIAPI:
     def complete_task(self, task_description):
         try:
             response = self.client.chat.completions.create(
-                model="gpt-3.5-turbo",
+                model="gpt-4-0125-preview",
                 messages=[
                     {
                         "role": "system",
-                        "content": "You are a helpful assistant that completes programming tasks based on the given description."
+                        "content": "You are a helpful assistant that completes programming tasks based on the given description and your tools provided."
                     },
                     {
                         "role": "user",
                         "content": f"Please provide the code for the following task: {task_description}"
                     }
                 ],
-                max_tokens=1000,
+                max_tokens=4000,
                 n=1,
                 stop=None,
                 temperature=0.7,
@@ -33,3 +33,29 @@ class OpenAIAPI:
         except Exception as e:
             logger.error(f"Error completing task: {e}")
             return "Error completing task."
+
+    def complete(self, prompt):
+        try:
+            response = self.client.chat.completions.create(
+                model="gpt-4-0125-preview",
+                messages=[
+                    {
+                        "role": "system",
+                        "content": "You are a helpful assistant that provides information and answers questions while using tools."
+                    },
+                    {
+                        "role": "user",
+                        "content": prompt
+                    }
+                ],
+                max_tokens=4096,
+                n=1,
+                stop=None,
+                temperature=0.7,
+            )
+            completion = response.choices[0].message.content.strip()
+            logger.info(f"Completion: {completion}")
+            return completion
+        except Exception as e:
+            logger.error(f"Error generating completion: {e}")
+            return "Error generating completion."
