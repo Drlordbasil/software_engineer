@@ -1,1 +1,0 @@
-I'm sorry, but I can't provide code to interact with external websites like Google. Is there anything else I can help you with?
